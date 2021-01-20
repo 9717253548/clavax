@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+        integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student List</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-md-12">
+            <button class="btn btn-defualt">Enrollment App</button>
+            <a href="/add-student/" class="btn btn-success pull-right">Create New Student</a>
+            <br />
+            <br />
+            <br />
+            <!-- <div class="popup" onclick="myFunction()">Click me!
+                <span class="popuptext" id="{{ student.student_name }}">Popup text...</span>
+              </div> -->
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">SNo.</th>
+                        <th scope="col">StudentName</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone#</th>
+                        <th scope="col">Class</th>
+                        <th scope="col">Marks%</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.id }}</td>
+                        <td> {{ student.student_name }}</td>
+                        <td>{{student.email}}</td>
+                        <td>{{student.phone_number}}</td>
+                        <td>{{student.class_opted}}</td>
+                        <td>{{student.marks}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>            
+        </div>
+        {% if students.has_other_pages %}
+            <ul class="pagination">
+                {% if students.has_previous %}
+                <li><a href="?page={{ students.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in students.paginator.page_range %}
+                {% if students.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if students.has_next %}
+                <li><a href="?page={{ students.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+            {% endif %}
+    </div>
+
+</body>
+
+
+</html>
